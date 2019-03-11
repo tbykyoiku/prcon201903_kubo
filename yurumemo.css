@@ -1,0 +1,276 @@
+﻿@charset "utf-8";
+
+html {
+    height: 100%;
+}
+
+body{
+    height: 100%;
+	/* 背景画像(スクロール固定) */
+	background-image: url("img/stripe-blue.gif");
+	background-attachment: fixed;
+	margin:0;
+}
+
+/* ページタイトル */
+h1{
+	text-align:center;
+	margin: 0;
+}
+
+/* 背景透過 */
+.back{
+	margin: 0 auto;
+	background-color: rgba(255, 192, 203, 0.8);
+	width: 900px;
+	overflow: hidden;
+}
+
+
+/* タイトル用吹き出し */
+.balloon-line {
+	/* 三角の位置を固定 */
+	position: relative; 
+	width: 830px; 
+	margin: 0 auto 15px;
+	padding: 15px;
+	background: #fff;
+	border: 1px solid #aaa;
+	text-align: left;
+	border-radius: 18px; 
+}
+
+/* 三角 */
+.balloon-line::before,
+.balloon-line::after { 
+	content: '';
+	border: 14px solid transparent;
+	position: absolute;
+	left: 5%;
+	margin-left: -12px;
+}
+
+/* 線になる部分 */
+.balloon-line::before { 
+	/* 吹き出しの線の色と同じ色 */
+	border-top-color: #aaa; 
+	bottom: -28px;
+}
+/* 地の部分 */
+.balloon-line::after { 
+	/* 吹き出しの背景色と同じ色 */
+	border-top-color: #fff; 
+	bottom: -27px;
+}
+
+/* タイトル入力エリア */
+.title-input {
+	position: relative;
+	display: block;
+	width:95%;
+	font-size: 13pt;
+	border: none;
+/*	color: #a0a0a0;*/
+	outline: none;
+}
+
+/* 本文入力エリア */
+/* 外枠 */
+.box{
+	margin: 0 auto;
+	padding: 10px 3px 0px 3px;
+	border: solid 1px #aaa;
+	border-radius:20px;
+	width: 860px;
+	background:#ffffff;
+	overflow: hidden;
+}
+
+/* テキストエリア */
+.box textarea{
+	border:none;
+	box-shadow: none;
+	padding: 15px 20px;
+	display:block;
+	margin:auto;
+	width:100%;
+	height:100%;
+	background:#ffffff;
+	scrollbar-base-color:#ffffff;
+	overflow:hidden;
+	color:#eee;
+	outline:none;
+/*	overflow-x:hidden;*/
+/*	overflow-y:scroll; */
+}
+
+/* 行数・文字数カウンター */
+.textCount,
+.lineCount {
+	margin:2px 20px 5px 0px;
+	font-size:10pt;
+	float:right;
+	color:#aaa;
+}
+
+.textCount::after {
+	content: '文字';
+	border:none;
+}
+
+.lineCount::after {
+	content: '行';
+	border:none;
+}
+
+form{
+	display:block;
+	margin:auto;
+	margin-top:10px;
+	width:560px;
+	text-align:center;
+}
+input{
+	padding:5px 10px 5px 10px;
+}
+
+
+/* 保存リスト関連 */
+/* リスト表示モーダルウィンドウ */
+.modal-content {
+	position:fixed;
+	display:none;
+	z-index:2;
+	width:700pt;
+	margin:0;
+	padding:10px 20px;
+	border:1px solid #ff69b4;
+	border-radius:15px;
+	background:#fff;
+}
+
+.modal-overlay {
+	z-index:1;
+	display:none;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:120%;
+	background-color:rgba(0,0,0,0.7);
+}
+
+.modal-content p {
+	font-size:8pt;
+	margin-bottom:-16px;
+	margin-left:13px;
+}
+
+/* モーダルウィンドウclose */
+.modal-close {
+	padding:0;
+	color:#ff69b4;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:22pt;
+	float:right;
+}
+
+.modal-close:hover {
+	cursor:pointer;
+	color:#91bbe9;
+}
+
+/* リスト全体 */
+.list-save {
+	width:670pt;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.input-group {
+	padding:5px 10px;
+	font-size:12pt;
+}
+
+/* リストタイトルバー */
+.list-title,
+.list-content {
+	padding:10px 10px 5px 10px;
+	display: inline-block;
+	text-align:center;
+	font-weight:bold;
+	border:none;
+}
+
+/* 一覧表示値 */
+/* タイトル・本文のヘッダ */
+.input-title,
+.input-content {
+	height:18pt;
+	font-size:11pt;
+	padding:5px 10px;
+	display: inline-block;
+	border:1px solid #c0c0c0;
+	border-radius:3px;
+}
+/* タイトル */
+.list-title,
+.input-title {
+	width:200pt;
+}
+/* 本文 */
+.list-content,
+.input-content {
+	width:350pt;
+}
+
+/* ボタン */
+.btn-load,
+.btn-clear,
+.btn-default {
+	margin:3px 0px 0px 1px;
+	padding:5px 3px;
+	height:22pt;
+	width:70pt;
+	color:#ffffff;
+	background-color:#ff69b4;
+	border:1px solid #ff69b4;
+	border-radius:3px;
+	transition: .4s;
+}
+
+.btn-load:hover,
+.btn-clear:hover,
+.btn-default:hover {
+	cursor:pointer;
+	background-color: #ffffff;
+	border-color:#ff69b4;
+	color: #ff69b4;
+}
+
+/* 削除ボタン */
+.btn-clear {
+	margin:10px;
+}
+
+/* 削除ボタン非活性時 */
+.btn-clear:disabled {
+	background-color:#ccc;
+	border-color:#ccc;
+	color: #ffffff;
+}
+
+/* 全選択・全解除チェックボックス */
+#allCheck {
+	margin:14px;
+	padding-right:10px;
+}
+
+.usagi {
+	z-index:1;
+	position:fixed;
+	top:73%;
+	right:8px;
+}
+

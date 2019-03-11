@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-language" content="ja">
+	<meta name="description" content="ゆるめも。">
+	<title>ゆるめも。</title>
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<link rel="stylesheet" href="yurumemo.css">
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="js/yurumemo.js"></script>
+	<script> //TinyMCE設定
+		tinymce.init({
+			selector: "textarea",
+			language: "ja",
+			branding: false,
+			elementpath: false,
+			forced_root_block: false,
+			height : 580,
+			menubar:false,
+			plugins: "print textcolor link searchreplace insertdatetime emoticons code ",
+			toolbar: [ 
+				// 戻る 進む | 太字 斜体 下線 打ち消し線 文字色 背景色 書式クリア ｜ 文字サイズ フォント | 左寄せ 中央寄せ 右寄せ 均等割付 | フォーマット | 箇条書き 段落番号 インデントを減らす インデント | 印刷 リンク | 検索  日時挿入 絵文字 ソース
+				"undo redo | bold italic underline strikethrough removeformat | forecolor backcolor | fontsizeselect fontselect | alignleft aligncenter alignright alignjustify | formatselect | bullist numlist outdent indent | searchreplace link emoticons insertdatetime | print code "
+			],
+			// 行数・文字数カウント
+			setup: function(ed) {
+				ed.on('keyup', function(e) {
+					// brタグの数で行数をカウント
+					document.getElementById('lineCount').innerHTML = (ed.getContent().match( new RegExp("<br />", "g" )) || []).length +1;
+					// 改行、空白を除外して文字数をカウント
+					document.getElementById('textCount').innerHTML = ed.getContent({ format: 'text' }).replace(/\s/g, '').length;
+				});
+			}
+		});
+	</script>
+</head>
+<body>
+	<div class="back">
+		<!-- ロゴ -->
+		<h1><img src = "img/logo.gif" title = "ゆるいメモ帳" ></h1>
+		<!-- タイトル入力エリア -->
+		<div class="balloon-line">
+			<input type="text" id="title-input" class="title-input" name="title" placeholder="Title：" maxlength="50" />
+		</div>
+		<!-- 本文 -->
+		<div class="box" >
+			<!-- ボタン -->
+				<button type="button" class="btn-default" id="newObj" style="margin-left:2px;" >新規作成</button>
+				<button type="button" class="btn-default" id="saveObj" >保存</button>
+				<button type="button" class="btn-default" id="loadObj" data-target="modal1" >読込</button>
+				<button type="button" class="btn-default" id="dlObj" href="#" >ダウンロード</button>
+			<!-- 本文入力エリア -->
+			<textarea id="input" name="input" onkeyup="CountLength(value);"></textarea>
+			<!-- 行数・文字数カウンター -->
+			<div class = "counter">
+				<span id="textCount" class="textCount">0</span>
+				<span id="lineCount" class="lineCount">0</span>
+			</div>
+		</div>
+		<br>
+
+		<!-- モーダルウィンドウ -->
+		<div id="modal1" class="modal-content">
+			<!-- モーダルウィンドウクローズ -->
+			<a class="modal-close" value="閉じる"> × </a>
+
+			<!-- 削除用チェックボックス -->
+			<p class="all"  style="display: none;" >all</p>
+			<input type="checkbox" class="all" id="allCheck" style="display: none;" />
+			<!-- リストヘッダ -->
+			<span class="list-title" id="listTitle">タイトル</span>
+			<span class="list-content" id="listContent">本文</span>
+
+
+			<!-- 保存リスト表示エリア -->
+			<div id="saveList">
+			</div>
+			<!-- 編集・削除ボタン -->
+			<div>
+				<input type="button" class="btn-clear" id="btnEdit" value="編集" />
+				<button type="button" class="btn-clear" id="btnClear" style="display: none;" >削除</button>
+			</div>
+		</div>
+
+		<!-- うさぎ表示エリア -->
+		<div class="usagi">
+			<img src="img/usagi.gif" id="usagi1"  border="0" width="123" height="243">
+		</div>
+
+	</div>
+</body>
+</html>
